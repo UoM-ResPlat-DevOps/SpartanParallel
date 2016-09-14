@@ -76,7 +76,7 @@
 ### Amdahl's Law 
 -- *Slide* --
 * Because some of the task is in serial, there is a limit to the speedup based on the time that is required for the sequential task - no matter how many processors are thrown at the problem.
-
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/amdhal.png" />
 -- *Slide End* --
 
 ### Gustafson-Barsis Law
