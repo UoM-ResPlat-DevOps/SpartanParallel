@@ -32,12 +32,15 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 1: Processors, Cores, and Threads
+### Part 1: Processors and Cores
 * A processor is a physical device that accepts data as input and provides results as output. A uniprocessor system has one such general purpose device. 
 * A unicore processor carries out the usual functions of a CPU, according to the instruction set. A multicore processor has independent central processing units ('cores') integrated a single integrated circuit die or a single chip package.
-* A process provides the resources to execute an instance of a program (such as address space, the code, handles to system objects, a process identifier etc).  An execution thread is the smallest processing unit in an operating system, contained inside a process. 
 -- *Slide End* --
 
+-- *Slide* --
+### Part I: Threads
+* A process provides the resources to execute an instance of a program (such as address space, the code, handles to system objects, a process identifier etc).  An execution thread is the smallest processing unit in an operating system, contained inside a process. 
+-- *Slide End* --
 
 -- *Slide* --
 ### Part 1: Multicore Drivers
@@ -54,7 +57,7 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Shared and Distributed Memory
+### Part I: Memory Distribution
 * In a  multiprocessor computer system memory can either be distributed or shared. Memory coherence is an issue is shared memory environments.
 * HPC Clusters use memory distributed between compute nodes and shared within compute nodes.
 * Operating systems like Plan 9 from Bell Labs creates a network function as a single collection of system resources.
@@ -62,23 +65,45 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Speedup and Locks
+### Part I: Speedup and Locks
 * The speedup of parallelism can be measured: Speedup (p) = Time (serial)/ Time (parallel). Ideal (linear) speedup is S(p) = p.
 * Correctness requires requires synchronisation (locking). Synchronisation and atomic operations causes loss of performance, communication latency. 
 -- *Slide End* --
 
 -- *Slide* --
-### Deadlocks and Livelocks
+### Part I: Deadlocks and Livelocks
 * "When two trains approach each other at a crossing, both shall come to a full stop and neither shall start up again until the other has gone." (apocryphal Kansas railway statute)
 * "When two people approach each other in a crowded corridor, both shall move out of the way of the other, and shall continue to move until they have an open path for progress" (Polite Persons in a Corridor Problem)
 -- *Slide End* --
 
-### Amdahl's Law 
 -- *Slide* --
+### Part I: Amdahl's Law 
 * Because some of the task is in serial, there is a limit to the speedup based on the time that is required for the sequential task - no matter how many processors are thrown at the problem.
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/amdhal.png" />
 -- *Slide End* --
 
-### Gustafson-Barsis Law
+-- *Slide* --
+### Part I: Gustafson-Barsis Law
+* Gene Amdahl proposed his law in 1967; it wasn't until over twenty years later in 1988 that an alternative by John L. Gustafson and Edwin H. Barsis was offered. 
+* Amadahl's Law assumed a computation problem of fixed data set size. Programmers tend to set the size of their computational problems according to the available equipment; therefore as faster and more parallel equipment becomes available, larger problems can be solved.
+-- *Slide End* --
 
+-- *Slide* --
+### Part II: Data Parallel Jobs
+* Data parallel jobs are the simplest type of parallelism - and the most common.
+* Single threaded jobs (such as MATLAB, R etc) can be launched across multiple datasets by using job arrays.
+* Example job arrays in Slurm at: `/usr/local/common/array`
+* Note that the index values and step size can be varied.
+-- *Slide End* --
+
+-- *Slide* --
+### Part II: Task Parallel Jobs
+* Task parallel jobs require a communications systems whether it is through threads (OpenMP) or by message passing (OpenMPI).
+* Thread-based parallelism requires that the tasks occur within the same computer node (shared memory). Message passing can distribute information between compute nodes (distributed memory).
+* In Slurm scripts on Spartan MPI programmes will need to set the paths to the OpenMPI wrappers (`module avail OpenMPI`). Some simple examples are available at: `/usr/local/common/OpenMPI`
+-- *Slide End* --
+
+-- *Slide* --
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/distmemory.png" />
+-- *Slide End* --
 
