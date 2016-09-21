@@ -113,7 +113,7 @@
 <section data-markdown><script type="text/template">
 ### Part I: Amdahl's Law 
 * Because some of the task is in serial, there is a limit to the speedup based on the time that is required for the sequential task - no matter how many processors are thrown at the problem.
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Fork_join.svg/2000px-Fork_join.svg.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/amdhal.png" />
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part I: Gustafson-Barsis Law
@@ -160,11 +160,6 @@ https://github.com/resbaz/mdcs-setup/wiki/MatLab-client-VMs-in-Nectar-%28%22the-
 * A fork-join approach can be used in multithreading. This is the method used by OpenMP and also with POSIX threads (pthreads). 
 * A program's execution branches off in parallel threads at specified points in the program and joins and merges at a subsequent specified point, returning to serial execution.
 * A master thread contains the instructions that are to be executed in parallel and executes additional worker threads that divide the task among them. 
-</script></section>
-<section data-markdown><script type="text/template">
-### Part III: Fork-Join
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/fork_join.png" />
-* By Wikipedia user A1 - w:en:File:Fork_join.svg, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=32004077
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part III: OpenMP Directives
@@ -230,7 +225,7 @@ The `sections` construct contains a collection of structured blocks that are dis
 |Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
-| MPI_Rsend() | Receive send. Message must be already posted or is lost. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
+| MPI_Rsend() | Receive send. Message must be already posted. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part IV: Collective Communications
@@ -252,11 +247,14 @@ The `sections` construct contains a collection of structured blocks that are dis
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part IV: Reductions
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/reduce.png" /> <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/allreduce.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/reduce.png" /> 
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Reductions
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/allreduce.png" />
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part IV: Reduction Operators
-* MPI reduction operations include the following:
 | MPI_Name  | Function |
 |:----------|:---------|
 | MPI_MAX   | Maximum  |
