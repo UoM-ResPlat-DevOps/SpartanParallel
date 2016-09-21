@@ -224,7 +224,8 @@ The `sections` construct contains a collection of structured blocks that are dis
 
 -- *Slide* --
 ### Part IV: Sending and Receive Options
-|Send Mode | Explanation |  Benefits |  Problems
+|Send Mode | Explanation | Benefits  |Problems      |
+|:---------|:------------|:----------|:-------------:|
 |MPI_Send() | Standard send. May be synchronous or buffering | Flexible tradeoff; automatically uses buffer if available, but goes for synchronous if not. | Can hide deadlocks, uncertainty of type makes debugging harder. |
 | MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
