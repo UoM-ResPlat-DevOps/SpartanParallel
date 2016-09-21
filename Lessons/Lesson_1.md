@@ -104,11 +104,6 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part II: Memory
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/distmemory.png" />
--- *Slide End* --
-
--- *Slide* --
 ### Part II: Task Parallel NAMD
 * A number of applications are already designed to be task parallel; NAMD (a molecullar modelling progam) is one. An example slurm script is located at `/usr/local/common/NAMD`. This script can be run and can be visualised locally with VMD.
 -- *Slide End* --
@@ -199,44 +194,48 @@ The `sections` construct contains a collection of structured blocks that are dis
 -- *Slide End* --
 
 -- *Slide* --
-### Part IV: Sending and Receiving
+### Part IV: Send and Receiving
 * There are several routines for sending and receiving information in MPI. In each of these a number of parameters must be included, including the buffer, the rank of the sender, the rank of the receiver, a communication notice, a tag.
 * If the MPI communications world is analoguous to a postal service, this information is the equivalent of addressing an envelope.
 * The basic example is `mpi-sendrecv.c` and `mpi-sendrecv.f90`.
 -- *Slide End* --
 
 -- *Slide* --
-### Part IV: Sending and Receive Options
+### Part IV: Send and Receive Options
 * `MPI_Status()` MPI_Status is not a routine, but  rather a data structure and is typically attached to an MPI_Recv() routine.
 * `MPI_Ssend()` MPI_Ssend performs a synchronous-mode, blocking send. Whereas MPI_Send will not return until the program can use the send buffer,  MPI_Ssend will no return until a matching receive is posted.
 -- *Slide End* --
 
 
 -- *Slide* --
-### Part IV: Sending and Receive Options
-|Send Mode | Explanation |  Benefits |  Problems
-|MPI_Send() | Standard send. May be synchronous or buffering | Flexible tradeoff; automatically uses buffer if available, but goes for synchronous if not. | Can hide deadlocks, uncertainty of type makes debugging harder. |
-| MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
-| MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
-| MPI_Rsend() | Receive send. Message must be already posted or is lost. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
--- *Slide End* --
-
-
--- *Slide* --
-### Part IV: Sending and Receive Options
+### Part IV: Send and Receive Options
 |Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 |MPI_Send() | Standard send. May be synchronous or buffering | Flexible tradeoff; automatically uses buffer if available, but goes for synchronous if not. | Can hide deadlocks, uncertainty of type makes debugging harder. |
 | MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
+-- *Slide End* --
+
+### Part IV: Send and Receive Options cont..
+|Send Mode | Explanation | Benefits  |Problems      |
+|:---------|:------------|:----------|:-------------:|
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
 | MPI_Rsend() | Receive send. Message must be already posted or is lost. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
 -- *Slide End* --
 
 -- *Slide* --
-### Part IV: Sending and Receive Options
+### Part IV: Collective Communications
 * MPI can also conduct collective communications.  These include MPI_Broadcast, MPI_Scatter, MPI_Gather, MPI_Reduce, and MPI_Allreduce. 
 * MPI_Bcast Broadcasts a message from the process with rank "root" to all other processes of the communicator, including itself. It is significantly more prefereable than using a loop.
+* MPI_Scatter sends data from one task to all tasks in a group; the inverse operation of MPI_Gather. The outcome is as if the root executed n send operations and each process executed a receive. MPI_Scatterv scatters a buffer in parts to all tasks in a group.
 -- *Slide End* --
+
+
+-- *Slide* --
+### Part IV: Collective Communications
+
+-- *Slide End* --
+
+
 
 
 
