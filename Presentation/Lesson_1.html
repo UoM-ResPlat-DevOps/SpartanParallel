@@ -113,7 +113,7 @@
 <section data-markdown><script type="text/template">
 ### Part I: Amdahl's Law 
 * Because some of the task is in serial, there is a limit to the speedup based on the time that is required for the sequential task - no matter how many processors are thrown at the problem.
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/amdhal.png" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Fork_join.svg/2000px-Fork_join.svg.png" />
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part I: Gustafson-Barsis Law
@@ -132,10 +132,6 @@
 * Task parallel jobs require a communications systems whether it is through threads (OpenMP) or by message passing (OpenMPI).
 * Thread-based parallelism requires that the tasks occur within the same computer node (shared memory). Message passing can distribute information between compute nodes (distributed memory).
 * In Slurm scripts on Spartan MPI programmes will need to set the paths to the OpenMPI wrappers (`module avail OpenMPI`). Some simple examples are available at: `/usr/local/common/OpenMPI`
-</script></section>
-<section data-markdown><script type="text/template">
-### Part II: Memory
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/distmemory.png" />
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part II: Task Parallel NAMD
@@ -213,24 +209,24 @@ The `sections` construct contains a collection of structured blocks that are dis
 * The examples `mpi-helloworld.c` and `mpi-helloworld.f90`
 </script></section>
 <section data-markdown><script type="text/template">
-### Part IV: Sending and Receiving
+### Part IV: Send and Receiving
 * There are several routines for sending and receiving information in MPI. In each of these a number of parameters must be included, including the buffer, the rank of the sender, the rank of the receiver, a communication notice, a tag.
 * If the MPI communications world is analoguous to a postal service, this information is the equivalent of addressing an envelope.
 * The basic example is `mpi-sendrecv.c` and `mpi-sendrecv.f90`.
 </script></section>
 <section data-markdown><script type="text/template">
-### Part IV: Sending and Receive Options
+### Part IV: Send and Receive Options
 * `MPI_Status()` MPI_Status is not a routine, but  rather a data structure and is typically attached to an MPI_Recv() routine.
 * `MPI_Ssend()` MPI_Ssend performs a synchronous-mode, blocking send. Whereas MPI_Send will not return until the program can use the send buffer,  MPI_Ssend will no return until a matching receive is posted.
 </script></section>
 <section data-markdown><script type="text/template">
-### Part IV: Sending and Receive Options
+### Part IV: Send and Receive Options
 |Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 |MPI_Send() | Standard send. May be synchronous or buffering | Flexible tradeoff; automatically uses buffer if available, but goes for synchronous if not. | Can hide deadlocks, uncertainty of type makes debugging harder. |
 | MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
-
-### Part IV: Sending and Receive Options cont..
+</script></section>
+<section data-markdown><script type="text/template">
 |Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
@@ -241,6 +237,45 @@ The `sections` construct contains a collection of structured blocks that are dis
 * MPI can also conduct collective communications.  These include MPI_Broadcast, MPI_Scatter, MPI_Gather, MPI_Reduce, and MPI_Allreduce. 
 * MPI_Bcast Broadcasts a message from the process with rank "root" to all other processes of the communicator, including itself. It is significantly more prefereable than using a loop.
 * MPI_Scatter sends data from one task to all tasks in a group; the inverse operation of MPI_Gather. The outcome is as if the root executed n send operations and each process executed a receive. MPI_Scatterv scatters a buffer in parts to all tasks in a group.
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Collective Communications
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/scatter.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/gather.png" />
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Reductions
+* MPI_Reduce performs a reduce operation (such as sum, max, logical AND, etc.) across all the members of a communication group.
+* MPI_Allreduce conducts the same operation but returns the reduced result to all processors.
+* The general principle in Reduce and All Reduce is the idea of reducing a set of numbers to a small set via a function. If you have a set of numbers (e.g., [1,2,3,4,5]) a reduce function (e.g., sum) can convert that set to a reduced set (e.g., 15). MPI_Reduce takes in an array of values as that set and outputs the result to the root process. MPI_AllReduce outputs the result to all processes.
+* Example of collective communication and reduction at: `mpi-particle.f90` `mpi-particle.f90`
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Reductions
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/reduce.png" /> <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/allreduce.png" />
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Reduction Operators
+* MPI reduction operations include the following:
+| MPI_Name  | Function |
+|:----------|:---------|
+| MPI_MAX   | Maximum  |
+| MPI_MIN   | Minimum  |
+| MPI_SUM   | Sum      |
+| MPI_PROD  | Product  |
+| MPI_LAND  | Logical AND |
+</script></section>
+<section data-markdown><script type="text/template">
+### Part IV: Reduction Operators
+| MPI_Name  | Function |
+|:----------|:---------|
+| MPI_BAND  | Bitwise AND |
+| MPI_LOR   | Logical OR  |
+| MPI_BOR   | Bitwise OR |
+| MPI_LXOR  | Logical exclusive OR |
+| MPI_BXOR  | Bitwise exclusive OR |
+| MPI_MAXLOC | Maximum and location |
+| MPI_MINLOC | Miniumun and location|
 </script></section>
     </div>
 
