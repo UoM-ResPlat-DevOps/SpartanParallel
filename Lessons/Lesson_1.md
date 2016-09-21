@@ -268,3 +268,7 @@ The `sections` construct contains a collection of structured blocks that are dis
 | MPI_MAXLOC | Maximum and location |
 | MPI_MINLOC | Miniumun and location|
 -- *Slide End* --
+
+-- *Slide* --
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hypnotoad.png" />
+-- *Slide End* --
