@@ -3,7 +3,6 @@
 * Part 1: Architecture, and Parallel Limits
 * Part 2: Shared Memory Programming with OpenMP
 * Part 3: Basic Distributed Memory Programming with OpenMPI
-* Part 4: Debugging Paralllel Programs
 -- *Slide End* --
 
 -- *Slide* --
@@ -227,7 +226,7 @@ The `sections` construct contains a collection of structured blocks that are dis
 -- *Slide End* --
 
 -- *Slide* --
-### Part 4: Reduction Operators
+### Part 3: Reduction Operators
 | MPI_Name  | Function |
 |:----------|:---------|
 | MPI_MAX   | Maximum  |
