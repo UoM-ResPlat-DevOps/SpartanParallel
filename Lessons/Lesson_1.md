@@ -42,14 +42,14 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 1: Task Parallel Python
-* Python is, by default, a single-threaded programming language. However we have added the mpi4py package to give it parallel capabilites. Example scripts are located at `/usr/local/common/Python`. In particular the file `twitter_search_541635.py` invokes the mpi4py library.
-* A number of examples are available at `/usr/local/common/Python/mpi4py-examples-master`
+### Part 1: Task Parallel Matlab
+* There is a simple example of task parallel Matlab, available in `/usr/local/common/MATLAB`, using the most basic of Matlab worker distribution, the parfor loop.
 -- *Slide End* --
 
 -- *Slide* --
-### Part 1: Task Parallel Matlab
-* There is a simple example of task parallel Matlab, available in `/usr/local/common/MATLAB`, using the most basic of Matlab worker distribution, the parfor loop.
+### Part 1: Task Parallel Python
+* Python is, by default, a single-threaded programming language. However we have added the mpi4py package to give it parallel capabilites. Example scripts are located at `/usr/local/common/Python`. In particular the file `twitter_search_541635.py` invokes the mpi4py library.
+* A number of examples are available at `/usr/local/common/Python/mpi4py-examples-master`
 -- *Slide End* --
 
 -- *Slide* --
@@ -136,13 +136,17 @@
 
 -- *Slide* --
 ### Part 2: Pragma/Sentinels
-* The directory `/usr/local/common/OpenMP` has a Fortran and C hello world example. After launching an interactive job, these can be compiled and run with `gcc -fopenmp helloomp.c -o helloompc` or `gfortran -fopenmp helloomp.f90 -o helloompf`, `export OMP_NUM_THREADS=16`, and `./helloompc` or `./helloompf`.
+* The directory `/usr/local/common/OpenMP` has a Fortran and C hello world example. After launching an interactive job, these can be compiled and run with `gcc -fopenmp helloomp.c -o helloompc` or `gfortran -fopenmp helloomp.f90 -o helloompf`, `export OMP_NUM_THREADS=8`, and `./helloompc` or `./helloompf`.
 * These give simple examples of the use of pragma/sentinels and threading.
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Variables and ICVs 
+### Part 2: Variables 
 * The examples `sharedhello.c` and `sharedhello.f90` illustrate two further aspects. Firstly, that the value of variables inside a function can be different to those outside it, and secondly the number of threads that a function uses can be set.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: ICVs 
 * An official OpenMP publication contains an absolutely superb example of internal control variables and their interactions with runtime library routines (`icv1.f90` and `icv1.c`). 
 * Four ICV's - nest-var, mex-active-levels-var, dyn-var, and nthreads-var - are modified by calls their respective library routines (`omp_set_nested()`, `omp_set_max_active_levels()`, `omp_set_dynamic()`, and `omp_set_num_threads()`).
 -- *Slide End* --
@@ -151,7 +155,7 @@
 ### Part 2: Loop Constructs
 * One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`
 * A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks. This example is available at `hello1millsimd.f90`, `hello1millsimd.c`
-The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
+* The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
 -- *Slide End* --
 
 -- *Slide* --
@@ -190,11 +194,15 @@ The `sections` construct contains a collection of structured blocks that are dis
 |Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 |MPI_Send() | Standard send. May be synchronous or buffering | Flexible tradeoff; automatically uses buffer if available, but goes for synchronous if not. | Can hide deadlocks, uncertainty of type makes debugging harder. |
+-- *Slide End* --
+
+-- *Slide* --
+### Part 3: Send and Receive Options
+|:---------|:------------|:----------|:-------------:|
 | MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
 -- *Slide End* --
 
 -- *Slide* --
-|Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
 | MPI_Rsend() | Receive send. Message must be already posted. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
@@ -217,6 +225,10 @@ The `sections` construct contains a collection of structured blocks that are dis
 ### Part 3: Reductions
 * MPI_Reduce performs a reduce operation (such as sum, max, logical AND, etc.) across all the members of a communication group.
 * MPI_Allreduce conducts the same operation but returns the reduced result to all processors.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 3: Reductions
 * The general principle in Reduce and All Reduce is the idea of reducing a set of numbers to a small set via a function. If you have a set of numbers (e.g., [1,2,3,4,5]) a reduce function (e.g., sum) can convert that set to a reduced set (e.g., 15). MPI_Reduce takes in an array of values as that set and outputs the result to the root process. MPI_AllReduce outputs the result to all processes.
 * Example of collective communication and reduction at: `mpi-particle.f90` `mpi-particle.f90`
 -- *Slide End* --
@@ -295,7 +307,6 @@ The `sections` construct contains a collection of structured blocks that are dis
 
 -- *Slide* --
 ### Part 4: PDT and TAU
-* Not quite implemented on Spartan!
 * TAU (Tuning and Analysis Utilities) is a portable profiling and tracing toolkit.
 * Parallel Performance Issues include the following: Coverage - % of the code that is parallel., Granularity - Amount of work in each section
 Load Balancing., Locality - Communication structure., Synchronization - Locking latencies
