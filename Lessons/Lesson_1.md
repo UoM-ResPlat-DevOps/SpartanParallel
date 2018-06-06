@@ -17,7 +17,7 @@
 * The difference between data and task parallisation is a fundamental concept.
 * With a data parallel job the data is split up for paralleisation (e.g., multiple datasets, single task).
 * With a task parallel job the tasks are split up for parallelisation (e.g., multiple simultaneous tasks).
-* A job can be a hybrid of the two (e.g., multiple tasks, each running on multiple datasets)
+* A job can be a hybrid of the two (e.g., multiple tasks, multiple datasets)
 -- *Slide End* --
 
 -- *Slide* --
@@ -38,7 +38,7 @@
 -- *Slide* --
 ### Part 1: Task Parallel NAMD
 * In Slurm scripts on Spartan MPI programmes will need to set the paths to the OpenMPI wrappers (`module avail OpenMPI/`). Some simple examples are available at: `/usr/local/common/OpenMPI`
-* A number of applications are already designed to be task parallel; NAMD (a molecular modelling progam) is one. An example slurm script is located at `/usr/local/common/NAMD`. This script can be run and can be visualised locally with VMD.
+* A number of applications are already designed to be task parallel; NAMD is one. An example slurm script is located at `/usr/local/common/NAMD`. This script can be run and can be visualised locally with VMD.
 -- *Slide End* --
 
 -- *Slide* --
@@ -55,6 +55,10 @@
 -- *Slide* --
 ### Part 1: Flynn's Taxonomy
 * The type parallelisation can be determined by Flynn's taxonomy of computer Systems (1966), where each process is considered as the execution of a pool of instructions (instruction stream) on a pool of data (data stream), and with these streams are single or multiple. 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 1: Flynn's Taxonomy
 * Four basic possibilities: Single Instruction Stream, Single Data Stream (SISD), Single Instruction Stream, Multiple Data Streams (SIMD), Multiple Instruction Streams, Single Data Stream (MISD), Multiple Instruction Streams, Multiple Data Streams (MIMD)
 -- *Slide End* --
 
@@ -79,7 +83,11 @@
 * Datasets are becoming larger than computers are improving.
 * Effective clock speeds have flattened due to heat and power.
 * Increasing gap between memory and processing speeds. 
-* Symmetric multiprocessing is well established technology (IBM System/360, 1964)
+-- *Slide End* --
+
+-- *Slide* --
+### Part 1: Multicore Drivers
+* Symmetric multiprocessing (multi-processors, shared memory) is well established technology (IBM System/360, 1964)
 * Tilera have developed 64 core (TILE64, 2007), and then a 100 core processor (2009). Founder Dr. Anant Agarwal leads the MIT Angstron Project to develop a 1,000 core processor (2012).
 -- *Slide End* --
 
@@ -87,6 +95,10 @@
 ### Part 1: Memory Distribution
 * In a  multiprocessor computer system memory can either be distributed or shared. Memory coherence is an issue is shared memory environments.
 * HPC Clusters use memory distributed between compute nodes and shared within compute nodes.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 1: Memory Distribution
 * Operating systems like Plan 9 from Bell Labs creates a network function as a single collection of system resources.
 * OpenMP uses shared memory parallelism; MPI uses distributed memory parallelism. The latter can cross compute nodes.
 -- *Slide End* --
@@ -106,6 +118,9 @@
 -- *Slide* --
 ### Part 1: Amdahl's Law 
 * Because some of the task is in serial, there is a limit to the speedup based on the time that is required for the sequential task - no matter how many processors are thrown at the problem.
+-- *Slide End* --
+
+-- *Slide* --
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/amdhal.png" />
 -- *Slide End* --
 
@@ -119,12 +134,20 @@
 ### Part 2: Fork-Join in OpenMP and POSIX
 * A fork-join approach can be used in multithreading. This is the method used by OpenMP and also with POSIX threads (pthreads). 
 * A program's execution branches off in parallel threads at specified points in the program and joins and merges at a subsequent specified point, returning to serial execution.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Fork-Join in OpenMP and POSIX
 * A master thread contains the instructions that are to be executed in parallel and executes additional worker threads that divide the task among them. 
 -- *Slide End* --
 
 -- *Slide* --
 ### Part 2: OpenMP Directives
 * OpenMP API compiler directives and internal control variables can be added to a sequential program to invoke parallel capability. They are the absolute foundation from which a OpenMP program can be differentiated from a sequential program. 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: OpenMP Directives
 * OpenMP directives are designed to appear as comments unless the program is explicitly commanded to be attentive to them. Compiler directives are used to initiate a parallel region, divide code among threads, distribute loops among threads, and synchronise work among threads. 
 -- *Slide End* --
 
@@ -155,6 +178,10 @@
 ### Part 2: Loop Constructs
 * One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`
 * A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks. This example is available at `hello1millsimd.f90`, `hello1millsimd.c`
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Loop Constructs
 * The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
 -- *Slide End* --
 
@@ -197,14 +224,20 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 3: Send and Receive Options
+|Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 | MPI_Ssend() | Synchronous send. Doesn't return until receive has also completed. | Safest mode, confident that message has been received. | Lower performance, especially without non-blocking. |
 -- *Slide End* --
 
 -- *Slide* --
+|Send Mode | Explanation | Benefits  |Problems      |
 |:---------|:------------|:----------|:-------------:|
 | MPI_Bsend() | Buffered send. Copies data to buffer, program free to continue whilst message delivered later. | Good performance. Need to be aware of buffer space. | Buffer management issues. |
+-- *Slide End* --
+
+-- *Slide* --
+|Send Mode | Explanation | Benefits  |Problems      |
+|:---------|:------------|:----------|:-------------:|
 | MPI_Rsend() | Receive send. Message must be already posted. | Slight performance increase since there's no handshake. | Risky and difficult to design. |
 -- *Slide End* --
 
@@ -212,11 +245,14 @@
 ### Part 3: Collective Communications
 * MPI can also conduct collective communications.  These include MPI_Broadcast, MPI_Scatter, MPI_Gather, MPI_Reduce, and MPI_Allreduce. 
 * MPI_Bcast Broadcasts a message from the process with rank "root" to all other processes of the communicator, including itself. It is significantly more prefereable than using a loop.
-* MPI_Scatter sends data from one task to all tasks in a group; the inverse operation of MPI_Gather. The outcome is as if the root executed n send operations and each process executed a receive. MPI_Scatterv scatters a buffer in parts to all tasks in a group.
 -- *Slide End* --
 
 -- *Slide* --
 ### Part 3: Collective Communications
+* MPI_Scatter sends data from one task to all tasks in a group; the inverse operation of MPI_Gather. The outcome is as if the root executed n send operations and each process executed a receive. MPI_Scatterv scatters a buffer in parts to all tasks in a group.
+-- *Slide End* --
+
+-- *Slide* --
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/scatter.png" />
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/gather.png" />
 -- *Slide End* --
@@ -230,7 +266,7 @@
 -- *Slide* --
 ### Part 3: Reductions
 * The general principle in Reduce and All Reduce is the idea of reducing a set of numbers to a small set via a function. If you have a set of numbers (e.g., [1,2,3,4,5]) a reduce function (e.g., sum) can convert that set to a reduced set (e.g., 15). MPI_Reduce takes in an array of values as that set and outputs the result to the root process. MPI_AllReduce outputs the result to all processes.
-* Example of collective communication and reduction at: `mpi-particle.f90` `mpi-particle.f90`
+* Examples; `mpi-particle.f90` `mpi-particle.f90`
 -- *Slide End* --
 
 -- *Slide* --
