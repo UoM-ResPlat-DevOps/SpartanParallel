@@ -311,22 +311,18 @@
 * Race conditions. 
 * Deadlocks and livelocks.
 * Start with working serial code - then incrementally make parallel.
+* Basic debugging examples at `/usr/local/common/Debug`.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: Valgrind
 * Valgrind is a debugging suite that automatically detects many memory management and threading bugs. 
 * Typically built for serial applications, it can also be built with mpicc wrappers for GCC and Intel.
-* Use the same compiler used in both the build and the Valgrind test.
-* `mpiexec -np 2 valgrind ./mpi-sendrec 2> valgrind.out`
+* Use the same compiler used in both the build and the Valgrind test. Turn on debgugging information at compilation.
+* `mpicc -g mpi-debug.c -o mpi-debug` or `mpif90 -g mpi.debug.f90 -o mpi-debug` then `mpiexec -np 2 valgrind ./mpi-sendrec 2> valgrind.out`
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: GDB
 * GDB, the GNU Project debugger, allows you to see what happens to a program while it executes.
-* Need to recompile code with debugging symbols included.
-* e.g., `mpicc -g mpi-debug.c -o mpi-debug` or `mpif90 -g mpi.debug.f90 -o mpi-debug`
-</script></section>
-<section data-markdown><script type="text/template">
-### Part 4: GDB Operations
 * Stepwise operation on code.
 * `module load GDB`, `mpiexec -np 2 gdb --exec=mpi-debug --command=gdb.cmd`
 * Attach to individual processes and stepwise. 
