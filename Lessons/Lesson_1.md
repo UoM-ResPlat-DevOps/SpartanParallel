@@ -17,7 +17,7 @@
 * The difference between data and task parallisation is a fundamental concept.
 * With a data parallel job the data is split up for paralleisation (e.g., multiple datasets, single task).
 * With a task parallel job the tasks are split up for parallelisation (e.g., multiple simultaneous tasks).
-* A job can be a hybrid of the two (e.g., multiple tasks, multiple datasets)
+* A job can be a hybrid of the two (e.g., multiple tasks, multiple datasets).
 -- *Slide End* --
 
 -- *Slide* --
@@ -31,7 +31,7 @@
 -- *Slide* --
 ### Part 1: Task Parallel Jobs
 * Task parallel jobs require a communications systems whether it is through threads (OpenMP) or by message passing (OpenMPI).
-* Thread-based parallelism requires that the tasks occur within the same computer node (shared memory). 
+* Thread-based parallelism requires that the tasks occur within the same computer node (shared memory).
 * Message passing can distribute information between compute nodes (distributed memory).
 -- *Slide End* --
 
