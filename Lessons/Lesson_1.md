@@ -13,6 +13,12 @@
 -- *Slide End* --
 
 -- *Slide* --
+### Part 1: Parallel Programming Strategy
+#### "Taking control is the key strategy!"
+-- Dr. Rolf Rabenseifner, High Performance Computing Center, Stuttgart
+-- *Slide End* --
+
+-- *Slide* --
 ### Part 1: Data and Task Parallel Jobs
 * The difference between data and task parallisation is a fundamental concept.
 * With a data parallel job the data is split up for paralleisation (e.g., multiple datasets, single task).
