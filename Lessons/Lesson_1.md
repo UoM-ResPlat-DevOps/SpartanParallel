@@ -75,8 +75,9 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 1: Threads
+### Part 1: Threads and Strands
 * A process provides the resources to execute an instance of a program (such as address space, the code, handles to system objects, a process identifier etc).  An execution thread is the smallest processing unit in an operating system, contained inside a process. 
+* There are also hardware threads (aka "strands"). Determine this from the output of `lscupu` and view the `NUMA node` information.
 -- *Slide End* --
 
 -- *Slide* --
