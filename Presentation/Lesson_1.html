@@ -109,8 +109,9 @@
 * A unicore processor carries out the usual functions of a CPU, according to the instruction set. A multicore processor has independent central processing units ('cores') integrated a single integrated circuit die or a single chip package.
 </script></section>
 <section data-markdown><script type="text/template">
-### Part 1: Threads
+### Part 1: Threads and Strands
 * A process provides the resources to execute an instance of a program (such as address space, the code, handles to system objects, a process identifier etc).  An execution thread is the smallest processing unit in an operating system, contained inside a process. 
+* There are also hardware threads (aka "strands"). Determine this from the output of `lscupu` and view the `NUMA node` information.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 1: Multicore Drivers
