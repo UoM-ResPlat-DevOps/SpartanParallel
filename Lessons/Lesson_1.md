@@ -346,7 +346,7 @@
 ### Part 4: Gprof
 * Gprof, the GNU profiler, provides a flat profile (total execution time in each function) and and the call graph, which shows who called a function (parent) and who it called (child subroutines).
 * Instrumention code is inserted with the `-pg` option at compilation. The `gprof` tool can be run against the executatble and output. e.g.,
-* `gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof`, then `gprof test_gprof gmon.out > analysis.txt`
+* `gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof`, `./test_grof`, then `gprof test_gprof gmon.out > analysis.txt`
 
 
 -- *Slide* --
