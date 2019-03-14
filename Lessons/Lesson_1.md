@@ -95,7 +95,7 @@
 -- *Slide* --
 ### Part 1: Multicore Drivers
 * Symmetric multiprocessing (multi-processors, shared memory) is well established technology (IBM System/360, 1964)
-* Tilera have developed 64 core (TILE64, 2007), and then a 100 core processor (2009). Founder Dr. Anant Agarwal leads the MIT Angstron Project to develop a 1,000 core processor (2012).
+* Tilera have developed 64 core (TILE64, 2007), and then a 100 core processor (2009). Founder Dr. Anant Agarwal leads the MIT Angstron Project to develop a 1,000 core processor (2012). NViDIA P100 3584 CUDA Cores (2016)
 -- *Slide End* --
 
 -- *Slide* --
