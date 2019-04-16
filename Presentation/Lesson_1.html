@@ -307,32 +307,48 @@
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: Common Mistakes
-* Syntax errors (e.g., missing or wrong terminators, wrong qutotes)
-* Compiler can catch these.
+* Syntax errors (e.g., missing or wrong terminators, wrong qutotes). Compiler can catch these!
 * Semantic errors (e.g., crossing array bounds, wrong scope, memory leaks)
 * Compiler won't catch these - means unexpected behaviour.
+* Unit tests. Test mid-range, test boundary conditions, test out-of-bounds.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: Parallel Code
-* Race conditions. 
-* Deadlocks and livelocks.
+* Race conditions. e.g., different values racing to modify a variable.
+* Deadlocks and livelocks. e.g., locking mechanisms that halt, or loop forever.
 * Start with working serial code - then incrementally make parallel.
-* Basic debugging examples at `/usr/local/common/Debug`.
+* Basic debugging and profiling examples at `/usr/local/common/Debug`.
 </script></section>
 <section data-markdown><script type="text/template">
-### Part 4: Valgrind
+### Part 4: Valgrind for Memory Management
 * Valgrind is a debugging suite that automatically detects many memory management and threading bugs. 
 * Typically built for serial applications, it can also be built with mpicc wrappers for GCC and Intel.
 * Use the same compiler used in both the build and the Valgrind test. Turn on debgugging information at compilation.
 * `mpicc -g mpi-debug.c -o mpi-debug` or `mpif90 -g mpi.debug.f90 -o mpi-debug` then `mpiexec -np 2 valgrind ./mpi-sendrec 2> valgrind.out`
 </script></section>
 <section data-markdown><script type="text/template">
-### Part 4: GDB
+### Part 4: GDB for Debugging
 * GDB, the GNU Project debugger, allows you to see what happens to a program while it executes.
-* Stepwise operation on code.
-* `module load GDB`, `mpiexec -np 2 gdb --exec=mpi-debug --command=gdb.cmd`
-* Attach to individual processes and stepwise. 
+* Stepwise operation on code; 
+* Basic example with `gdbtest.c`. Consider using `--command=gdb.cmd`
+</script></section>
+<section data-markdown><script type="text/template">
+### Part 4: Diff and Patch
+* When making changes to code, separating between dev and prod versions is recommended.
+* Production code might work in one environment, but not another (e.g., compiler differences).
+* When you have a working dev code, create a patch file and apply when required:
+* `diff -u gdbtest.c gdbtest2.c > gdbpatch.patch`, `patch gdbtest.c gdbpatch.patch`
+</script></section>
+<section data-markdown><script type="text/template">
+### Part 4: GDB on multiple nodes
+* MPI example with gdb.cmd Attach to individual processes and stepwise. 
 * Add `printf("PID %d on %s ready for attach\n", getpid(), hostname);`, then `mpiexec -np 2 mpi-debug` and `gdb -p $PID` 
+</script></section>
+<section data-markdown><script type="text/template">
+### Part 4: Gprof
+* Gprof, the GNU profiler, provides a flat profile (total execution time in each function) and and the call graph, which shows who called a function (parent) and who it called (child subroutines).
+* Instrumention code is inserted with the `-pg` option at compilation. The `gprof` tool can be run against the executatble and output. e.g.,
+* `gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof`, `./test_grof`, then `gprof test_gprof gmon.out > analysis.txt`
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: PDT and TAU

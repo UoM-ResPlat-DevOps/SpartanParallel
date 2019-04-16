@@ -355,6 +355,7 @@
 * Add `printf("PID %d on %s ready for attach\n", getpid(), hostname);`, then `mpiexec -np 2 mpi-debug` and `gdb -p $PID` 
 -- *Slide End* --
 
+-- *Slide* --
 ### Part 4: Gprof
 * Gprof, the GNU profiler, provides a flat profile (total execution time in each function) and and the call graph, which shows who called a function (parent) and who it called (child subroutines).
 * Instrumention code is inserted with the `-pg` option at compilation. The `gprof` tool can be run against the executatble and output. e.g.,
