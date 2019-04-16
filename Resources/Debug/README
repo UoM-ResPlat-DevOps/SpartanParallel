@@ -1,0 +1,99 @@
+# This is a directory for memory and program debugging and profiling.
+
+# Launch an interactive job for these examples!
+
+sinteractive --partition=physical --ntasks=2 --time=1:00:00
+
+# Valgrind
+# The test program valgrindtest.c is form Punit Guron. In this example the memory allocated to the pointer 'ptr' is never freed in the program. 
+# Load the module and compile with debugging symbols.
+
+module load Valgrind/3.13.0-goolf-2015a
+gcc -Wall -g valgrindtest.c -o valgrindtest
+valgrind --leak-check=full ./valgrindtest 2> valgrind.out
+
+# GDB
+# Compile with debugging symbols. A good compiler will give a warning here, and run the program.
+
+gcc -Wall -g gdbtest.c -o gdbtest
+
+$ ./gdbtest
+Enter the number: 3
+The factorial of 3 is 0
+
+# Load the GDB module e.g.,
+
+module load GDB/7.8.2-goolf-2015a
+
+# Launch GDB, set up a break point in the code, and execute
+
+gbd gdbtest
+..
+(gdb) break 10
+(gdb) run
+(gdb) print j
+
+# Basic commands in GDB
+# run = run a program until end, signit, or breakpoint. Use Ctrl-C to stop
+# break = set a breakpoint, either by linenumber, function etc. (shortcut b)
+# list = list the code above and below where the program stopped (shortcut l)
+# continue = restart execution of program where is stopped (shortcut c). 
+# print = print a variable (shortcut p)
+# next, step = after using a signal or breakpoint use next and step to 
+# continue a progame line-by-line.  
+# NB: next will go 'over' the function call to the next line of code, 
+# step will go 'into' the function call (shortcut s)
+#
+# Variables can be temporarily modified with the `set` command
+# e.g., set j=1
+
+
+# The code will hit the breakpoint where you can interrogate the variables.
+# Testing the variable 'j' will show it has not been initialised.
+
+# Create a new file, initialise j to 1, and test again.
+
+cp gdbtest.c gdbtest2.c
+gcc -Wall -g gdbtest2.c -o gdbtest2
+$ ./gdbtest
+
+# There is still another bug! Can you find it? Use GDB to help.
+
+# Once you have fixed the second bug, use diff and patch to fix the original.
+# The -u option provides unified content for both files.
+
+diff -u gdbtest.c gdbtest2.c > gdbpatch.patch
+
+# The patch command will overwrite the source with the modifications 
+# specified in the destination. Test the original again!
+
+patch gdbtest.c gdbpatch.patch
+
+# For Gprof, instrumentation code is inserted with the `-pg` option when 
+# compiled.
+#  
+# GPROF output consists of two parts; the flat profile and the call graph. 
+# The flat profile gives the total execution time spent in each function.
+# The textual call graph, shows for each function; 
+# (a) who called it (parent) and (b) who it called (child subroutines). 
+#
+# Sample progam from Himanshu Arora, published on The Geek Stuff
+# Compile, run the executable.
+# Run the gprof tool. Various output options are available.
+
+gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof
+./test_gprof
+gprof test_gprof gmon.out > analysis.txt
+
+# For parallel applications each parallel process can be given its own
+# output file, using the undocumented environment variable GMON_OUT_PREFIX
+# Then run the parallel application as normal.
+# Each grof will create a binary for each profile ID.
+# View the gmon.out's as one
+
+export GMON_OUT_PREFIX=gmon.out
+mpicc -Wall -pg mpi-debug.c -o mpi-debug
+srun -n2 mpi-debug
+gprof mpi-debug gmon.out.*
+
+# Last update 20190416 LL
