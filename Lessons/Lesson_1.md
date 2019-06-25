@@ -138,24 +138,29 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Fork-Join in OpenMP and POSIX
+### Part 2: Fork-Join in POSIX
 * A fork-join approach can be used in multithreading. This is the method used by OpenMP and also with POSIX threads (pthreads). 
 * A program's execution branches off in parallel threads at specified points in the program and joins and merges at a subsequent specified point, returning to serial execution.
+* A master thread contains the instructions that are to be executed in parallel and executes additional worker threads that divide the task among them. 
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Fork-Join in OpenMP and POSIX
-* A master thread contains the instructions that are to be executed in parallel and executes additional worker threads that divide the task among them. 
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/fork_join2.gif" />
+Image from Lawrence Livermore National Laboratory
+-- *Slide End* --
+
+
+-- *Slide* --
+### Part 2: What Is OpenMP?
+* OpenMP (Open Multi-Processing) is an API for multi-threaded, shared-memory parallelism for Fortran and C/C++. The API consists of (i) compiler directives, (ii) run-time library routienes, and (iii) environment variables.
+* A standard for shared memory architectures, endorsed by some major players (e.g.. H-P, IBM, NAG, PGI etc). Founded in 1997.
+* Designed to relatively simple with significant benefits from a few explicit directives, but can be fine-grained (e.g., multiple levls of nested parallelism, and nested locks).
 -- *Slide End* --
 
 -- *Slide* --
 ### Part 2: OpenMP Directives
 * OpenMP API compiler directives and internal control variables can be added to a sequential program to invoke parallel capability. They are the absolute foundation from which a OpenMP program can be differentiated from a sequential program. 
--- *Slide End* --
-
--- *Slide* --
-### Part 2: OpenMP Directives
-* OpenMP directives are designed to appear as comments unless the program is explicitly commanded to be attentive to them. Compiler directives are used to initiate a parallel region, divide code among threads, distribute loops among threads, and synchronise work among threads. 
+* OpenMP directives are designed to appear as comments. Compiler directives initiate a parallel region, divide code among threads, distribute loops among threads, and synchronise work among threads. 
 -- *Slide End* --
 
 -- *Slide* --
@@ -171,8 +176,15 @@
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Variables 
+### Part 2: Variables and Scoping
 * The examples `sharedhello.c` and `sharedhello.f90` illustrate two further aspects. Firstly, that the value of variables inside a function can be different to those outside it, and secondly the number of threads that a function uses can be set.
+* Data within a parallal region is shared by default and all threads can access this data. Explicit rules are available for non-default settings.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Parallel I/O
+* The OpenMP standard has no specifications about parallel I/O. This may result in issues (race conditions) if multiple threads attempt to write/read from the same file.
+* It is entirely up to the programmer to ensure that I/O is conducted correctly within the context of a multi-threaded program. 
 -- *Slide End* --
 
 -- *Slide* --
