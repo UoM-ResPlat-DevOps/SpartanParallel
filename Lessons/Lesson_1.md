@@ -149,7 +149,6 @@
 Image from Lawrence Livermore National Laboratory
 -- *Slide End* --
 
-
 -- *Slide* --
 ### Part 2: What Is OpenMP?
 * OpenMP (Open Multi-Processing) is an API for multi-threaded, shared-memory parallelism for Fortran and C/C++. The API consists of (i) compiler directives, (ii) run-time library routienes, and (iii) environment variables.
@@ -158,21 +157,28 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: OpenMP Directives
+### Part 2: Preparation
+* The first step in any OpenMP program ought to be identification of the regions of code that could be executed concurrently or in parallel and then applying appropriate compiler directives.
+* The run-time routines (or sometimes functions in Fortran) are used to query and set threads within a directive scope.
+* The environment variables are specified by the shell to set and bind threads to processors. 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Caveat
+* The OpenMP standard has no specifications about parallel I/O. This may result in issues (race conditions) if multiple threads attempt to write/read from the same file.
+* It is entirely up to the programmer to ensure that I/O is conducted correctly within the context of a multi-threaded program. 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Compiler Directives
 * OpenMP API compiler directives and internal control variables can be added to a sequential program to invoke parallel capability. They are the absolute foundation from which a OpenMP program can be differentiated from a sequential program. 
 * OpenMP directives are designed to appear as comments. Compiler directives initiate a parallel region, divide code among threads, distribute loops among threads, and synchronise work among threads. 
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Preparation
-*  The first step in any OpenMP program ought to be identification of the regions of code that could be executed concurrently or in parallel and then applying appropriate directives.
-* OpenMP compiler directives must begin with a sentinel (Fortran) or pragma (C). All compiler directives have the basic form of: `sentinel/pragma directive-name clauses`
--- *Slide End* --
-
--- *Slide* --
-### Part 2: Pragma/Sentinels
-* The directory `/usr/local/common/OpenMP` has a Fortran and C hello world example. After launching an interactive job, these can be compiled and run with `gcc -fopenmp helloomp.c -o helloompc` or `gfortran -fopenmp helloomp.f90 -o helloompf`, `export OMP_NUM_THREADS=8`, and `./helloompc` or `./helloompf`.
-* These give simple examples of the use of pragma/sentinels and threading.
+### Part 2: Compiler Directives
+* OpenMP compiler directives must begin with a sentinel (Fortran) or pragma (C). All compiler directives have the basic form of: `sentinel/pragma directive-name [clauses, ...]`
+* The directory `/usr/local/common/OpenMP` has Fortran and C "hello world" examples. The file "PARALLEL' contains various options for this fundamental construct.
 -- *Slide End* --
 
 -- *Slide* --
@@ -182,15 +188,11 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide End* --
 
 -- *Slide* --
-### Part 2: Parallel I/O
-* The OpenMP standard has no specifications about parallel I/O. This may result in issues (race conditions) if multiple threads attempt to write/read from the same file.
-* It is entirely up to the programmer to ensure that I/O is conducted correctly within the context of a multi-threaded program. 
--- *Slide End* --
-
--- *Slide* --
-### Part 2: ICVs 
-* An official OpenMP publication contains an absolutely superb example of internal control variables and their interactions with runtime library routines (`icv1.f90` and `icv1.c`). 
-* Four ICV's - nest-var, mex-active-levels-var, dyn-var, and nthreads-var - are modified by calls their respective library routines (`omp_set_nested()`, `omp_set_max_active_levels()`, `omp_set_dynamic()`, and `omp_set_num_threads()`).
+### Part 2: Static, Orphaned, Dynamic
+* Static extent is enclosed within a structured directive block (e.g., a 'do' directive within a 'parallel' region).
+* Orphaned directive is appears independently from another enclosing directive. Can span routines.
+* Dynamic extent includes static extents and orphaned directives.
+* OpenMP scoping rules determine how directives can bind and nest with each other.
 -- *Slide End* --
 
 -- *Slide* --
@@ -201,6 +203,7 @@ Image from Lawrence Livermore National Laboratory
 
 -- *Slide* --
 ### Part 2: Loop Constructs
+* 
 * The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
 -- *Slide End* --
 
@@ -208,6 +211,13 @@ Image from Lawrence Livermore National Laboratory
 ### Part 2: Tasks and Synchronisation
 * `Task` constructs allow for a thread to generate tasks that are executed according to the runtime system, immediately or delayed. Task synchronisation is carried out with the `barrier` or `taskwait` constructs. 
 * An example of the task constructs are `colourless-3.f90` and `colourless-3.c`
+-- *Slide End* --
+
+
+-- *Slide* --
+### Part 2: ICVs 
+* An official OpenMP publication contains an absolutely superb example of internal control variables and their interactions with runtime library routines (`icv1.f90` and `icv1.c`). 
+* Four ICV's - nest-var, mex-active-levels-var, dyn-var, and nthreads-var - are modified by calls their respective library routines (`omp_set_nested()`, `omp_set_max_active_levels()`, `omp_set_dynamic()`, and `omp_set_num_threads()`).
 -- *Slide End* --
 
 -- *Slide* --
