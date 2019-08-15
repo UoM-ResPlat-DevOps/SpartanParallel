@@ -182,6 +182,12 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide End* --
 
 -- *Slide* --
+### Part 2: Structural Definitions
+* The code an execution structure of OpenMP consists of structured blocks, constructs, and regions of code.
+* An OpenMP directive is followed by a *structured block* (in C, single or compound statements, braced block; in Fortran termined with an 'end' directive). A *construct* starts with the directive, includes the structured block, and the end directive. It contains the statements directly enclosed, and not any subroutines called from them. A *region of code* is all statements that are dynamically encountered while executing the code of an OpenMP construct. 
+-- *Slide End* --
+
+-- *Slide* --
 ### Part 2: Variables and Scoping
 * The examples `sharedhello.c` and `sharedhello.f90` illustrate two further aspects. Firstly, that the value of variables inside a function can be different to those outside it, and secondly the number of threads that a function uses can be set.
 * Data within a parallal region is shared by default and all threads can access this data. Explicit rules are available for non-default settings.
@@ -203,7 +209,6 @@ Image from Lawrence Livermore National Laboratory
 
 -- *Slide* --
 ### Part 2: Loop Constructs
-* 
 * The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
 -- *Slide End* --
 
