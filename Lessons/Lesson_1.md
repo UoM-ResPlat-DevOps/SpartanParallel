@@ -188,6 +188,12 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide End* --
 
 -- *Slide* --
+### Part 2: Nested Parallelism
+* A function can be called within a parallel region and that function itself can have a parallel region.
+* By default, the nested region will have only one thread; but this can be set with the `OMP_NESTED=true` environment variable. See the example, `nested.c`
+-- *Slide End* --
+
+-- *Slide* --
 ### Part 2: Variables and Scoping
 * The examples `sharedhello.c` and `sharedhello.f90` illustrate two further aspects. Firstly, that the value of variables inside a function can be different to those outside it, and secondly the number of threads that a function uses can be set.
 * Data within a parallal region is shared by default and all threads can access this data. Explicit rules are available for non-default settings.
@@ -201,10 +207,11 @@ Image from Lawrence Livermore National Laboratory
 * OpenMP scoping rules determine how directives can bind and nest with each other.
 -- *Slide End* --
 
+
 -- *Slide* --
 ### Part 2: Loop Constructs
-* One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`
-* A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks. This example is available at `hello1millsimd.f90`, `hello1millsimd.c`
+* One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`. Note difference between "parallel" and "parallel for/do".
+* A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.f90`, `hello1millsimd.c` [EDIT UP TO HERE]
 -- *Slide End* --
 
 -- *Slide* --
@@ -217,7 +224,6 @@ Image from Lawrence Livermore National Laboratory
 * `Task` constructs allow for a thread to generate tasks that are executed according to the runtime system, immediately or delayed. Task synchronisation is carried out with the `barrier` or `taskwait` constructs. 
 * An example of the task constructs are `colourless-3.f90` and `colourless-3.c`
 -- *Slide End* --
-
 
 -- *Slide* --
 ### Part 2: ICVs 

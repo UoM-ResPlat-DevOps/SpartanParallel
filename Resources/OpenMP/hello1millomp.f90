@@ -5,13 +5,12 @@ program hello
 	integer :: a
 	greetings = "Hello World!" 
 	
-	!$omp parallel
-	!$omp do 
+	!$omp parallel do
 	! Hello World, one million times
 	do a = 1, 1000000
 	print *, greetings   
 	end do
-	!$omp end parallel
+	!$omp end parallel do
 	
 end program hello
 
