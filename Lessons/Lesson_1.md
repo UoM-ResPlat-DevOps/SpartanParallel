@@ -202,27 +202,32 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 2: Static, Orphaned, Dynamic
 * Static extent is enclosed within a structured directive block (e.g., a 'do' directive within a 'parallel' region).
-* Orphaned directive is appears independently from another enclosing directive. Can span routines.
+* Orphaned directive is appears independently from another enclosing directive. Can span routines. See `omp_orphan.[c,f]`
 * Dynamic extent includes static extents and orphaned directives.
 * OpenMP scoping rules determine how directives can bind and nest with each other.
 -- *Slide End* --
 
-
 -- *Slide* --
 ### Part 2: Loop Constructs
 * One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`. Note difference between "parallel" and "parallel for/do".
-* A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.f90`, `hello1millsimd.c` [EDIT UP TO HERE]
+* A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.[c,f90]`
 -- *Slide End* --
 
 -- *Slide* --
 ### Part 2: Loop Constructs
-* The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.c`, `hello3versomp.f90`
+* The `sections` construct contains a collection of structured blocks that are distributed among the threads in the team. The examples are: `hello3versomp.[c.f90]`
+-- *Slide End* --
+
+-- *Slide* --
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/work_share1.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/work_share2.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/work_share3.png" />
 -- *Slide End* --
 
 -- *Slide* --
 ### Part 2: Tasks and Synchronisation
 * `Task` constructs allow for a thread to generate tasks that are executed according to the runtime system, immediately or delayed. Task synchronisation is carried out with the `barrier` or `taskwait` constructs. 
-* An example of the task constructs are `colourless-3.f90` and `colourless-3.c`
+* An example of the task constructs are `colourless-3.[f90,c]`
 -- *Slide End* --
 
 -- *Slide* --
