@@ -350,10 +350,11 @@ Image from Lawrence Livermore National Laboratory
 
 -- *Slide* --
 ### Part 4: Common Mistakes
-* Syntax errors (e.g., missing or wrong terminators, wrong qutotes). Compiler can catch these!
+* System and Syntax errors (e.g., wrong environment, missing or wrong terminators, wrong qutotes). 
+* Compiler can catch these!
 * Semantic errors (e.g., crossing array bounds, wrong scope, memory leaks)
 * Compiler won't catch these - means unexpected behaviour.
-* Unit tests. Test mid-range, test boundary conditions, test out-of-bounds.
+* Resolve with unit tests. Test mid-range, test boundary conditions, test out-of-bounds.
 -- *Slide End* --
 
 -- *Slide* --
