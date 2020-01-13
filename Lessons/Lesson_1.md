@@ -68,6 +68,14 @@
 * Four basic possibilities: Single Instruction Stream, Single Data Stream (SISD), Single Instruction Stream, Multiple Data Streams (SIMD), Multiple Instruction Streams, Single Data Stream (MISD), Multiple Instruction Streams, Multiple Data Streams (MIMD)
 -- *Slide End* --
 
+
+-- *Slide* --
+### Part 1: Flynn's Taxonomy
+* In the MIMD taxonomy there are now also the taxons of Single Program Multiple Data streams (SPMD) and Multiple Programs Multiple Data streams (MPMD).
+* In SPMD, multiple autonomous processors execute the same program on multiple data streams. This differs from SIMD approaches which a single processor executes on multiple data streams. 
+* In the latter case (MPMD) the autonomous processors operate with at least two independent programs.
+-- *Slide End* --
+
 -- *Slide* --
 ### Part 1: Processors and Cores
 * A processor is a physical device that accepts data as input and provides results as output. A uniprocessor system has one such general purpose device. 
