@@ -104,6 +104,12 @@
 * Four basic possibilities: Single Instruction Stream, Single Data Stream (SISD), Single Instruction Stream, Multiple Data Streams (SIMD), Multiple Instruction Streams, Single Data Stream (MISD), Multiple Instruction Streams, Multiple Data Streams (MIMD)
 </script></section>
 <section data-markdown><script type="text/template">
+### Part 1: Flynn's Taxonomy
+* In the MIMD taxonomy there are now also the taxons of Single Program Multiple Data streams (SPMD) and Multiple Programs Multiple Data streams (MPMD).
+* In SPMD, multiple autonomous processors execute the same program on multiple data streams. This differs from SIMD approaches which a single processor executes on multiple data streams. 
+* In the latter case (MPMD) the autonomous processors operate with at least two independent programs.
+</script></section>
+<section data-markdown><script type="text/template">
 ### Part 1: Processors and Cores
 * A processor is a physical device that accepts data as input and provides results as output. A uniprocessor system has one such general purpose device. 
 * A unicore processor carries out the usual functions of a CPU, according to the instruction set. A multicore processor has independent central processing units ('cores') integrated a single integrated circuit die or a single chip package.
@@ -340,10 +346,11 @@ Image from Lawrence Livermore National Laboratory
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: Common Mistakes
-* Syntax errors (e.g., missing or wrong terminators, wrong qutotes). Compiler can catch these!
+* System and Syntax errors (e.g., wrong environment, missing or wrong terminators, wrong qutotes). 
+* Compiler can catch these!
 * Semantic errors (e.g., crossing array bounds, wrong scope, memory leaks)
 * Compiler won't catch these - means unexpected behaviour.
-* Unit tests. Test mid-range, test boundary conditions, test out-of-bounds.
+* Resolve with unit tests. Test mid-range, test boundary conditions, test out-of-bounds.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 4: Parallel Code
