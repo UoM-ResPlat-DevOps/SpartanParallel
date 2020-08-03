@@ -153,6 +153,10 @@ Image from Lawrence Livermore National Laboratory
 ### Part 2: What Is OpenMP?
 * OpenMP (Open Multi-Processing) is an API for multi-threaded, shared-memory parallelism for Fortran and C/C++. The API consists of (i) compiler directives, (ii) run-time library routienes, and (iii) environment variables.
 * A standard for shared memory architectures, endorsed by some major players (e.g.. H-P, IBM, NAG, PGI etc). Founded in 1997.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: What Is OpenMP?
 * Designed to relatively simple with significant benefits from a few explicit directives, but can be fine-grained (e.g., multiple levls of nested parallelism, and nested locks).
 -- *Slide End* --
 
@@ -184,7 +188,12 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 2: Structural Definitions
 * The code an execution structure of OpenMP consists of structured blocks, constructs, and regions of code.
-* An OpenMP directive is followed by a *structured block* (in C, single or compound statements, braced block; in Fortran termined with an 'end' directive). A *construct* starts with the directive, includes the structured block, and the end directive. It contains the statements directly enclosed, and not any subroutines called from them. A *region of code* is all statements that are dynamically encountered while executing the code of an OpenMP construct. 
+* An OpenMP directive is followed by a *structured block* (in C, single or compound statements, braced block; in Fortran termined with an 'end' directive). 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Structural Definitions
+A *construct* starts with the directive, includes the structured block, and the end directive. It contains the statements directly enclosed, and not any subroutines called from them. A *region of code* is all statements that are dynamically encountered while executing the code of an OpenMP construct. 
 -- *Slide End* --
 
 -- *Slide* --
@@ -210,7 +219,7 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 2: Loop Constructs
 * One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`. Note difference between "parallel" and "parallel for/do".
-* A further variation is the SIMD loop, which enables multiple iterations concurrently by means of SIMD instructions, a particularly efficient method for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.[c,f90]`
+* A further variation is the SIMD loop, designed for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.[c,f90]`
 -- *Slide End* --
 
 -- *Slide* --
@@ -368,6 +377,10 @@ Image from Lawrence Livermore National Laboratory
 ### Part 4: Valgrind for Memory Management
 * Valgrind is a debugging suite that automatically detects many memory management and threading bugs. 
 * Typically built for serial applications, it can also be built with mpicc wrappers for GCC and Intel.
+-- *Slide End* --
+
+-- *Slide* --
+### Part 4: Valgrind for Memory Management
 * Use the same compiler used in both the build and the Valgrind test. Turn on debgugging information at compilation.
 * `mpicc -g mpi-debug.c -o mpi-debug` or `mpif90 -g mpi.debug.f90 -o mpi-debug` then `mpiexec -np 2 valgrind ./mpi-sendrec 2> valgrind.out`
 -- *Slide End* --
@@ -396,8 +409,12 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 4: Gprof
 * Gprof, the GNU profiler, provides a flat profile (total execution time in each function) and and the call graph, which shows who called a function (parent) and who it called (child subroutines).
+-- *Slide End* --
+-- *Slide* --
+
+### Part 4: Gprof
 * Instrumention code is inserted with the `-pg` option at compilation. The `gprof` tool can be run against the executatble and output. e.g.,
-* `gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof`, `./test_grof`, then `gprof test_gprof gmon.out > analysis.txt`
+`gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof`, `./test_grof`, then `gprof test_gprof gmon.out > analysis.txt`
 -- *Slide End* --
 
 -- *Slide* --
@@ -409,5 +426,5 @@ Load Balancing., Locality - Communication structure., Synchronization - Locking 
 -- *Slide End* --
 
 -- *Slide* --
-<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hypnotoad.png" />
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hypnotoad.png" height="200%" width="200%" />
 -- *Slide End* --
