@@ -103,7 +103,7 @@
 -- *Slide* --
 ### Part 1: Multicore Drivers
 * Symmetric multiprocessing (multi-processors, shared memory) is well established technology (IBM System/360, 1964)
-* Tilera have developed 64 core (TILE64, 2007), and then a 100 core processor (2009). Founder Dr. Anant Agarwal leads the MIT Angstron Project to develop a 1,000 core processor (2012). NViDIA P100 3584 CUDA Cores (2016)
+* Tilera have developed 64 core (TILE64, 2007), and then a 100 core processor (2009). Founder Dr. Anant Agarwal leads the MIT Angstron Project to develop a 1,000 core processor (2012). NViDIA P100 3584 CUDA Cores (2016). NViDIA V100 5120 CUDA Cores (2018). 
 -- *Slide End* --
 
 -- *Slide* --
@@ -413,6 +413,12 @@ A *construct* starts with the directive, includes the structured block, and the 
 ### Part 4: GDB on multiple nodes
 * MPI example with gdb.cmd Attach to individual processes and stepwise. 
 * Add `printf("PID %d on %s ready for attach\n", getpid(), hostname);`, then `mpiexec -np 2 mpi-debug` and `gdb -p $PID` 
+-- *Slide End* --
+
+-- *Slide* --
+### Part 4: Optimsation
+* "The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming." (Knuth, 1974)
+* Work with a top-down structure. Think big, then small. Look for data flow issues (within and outside of the program). Look at overall architecture. Then look at data structures and algorithm choices. Then profiling specific parts of the code to identify potential areas of gain.
 -- *Slide End* --
 
 -- *Slide* --
