@@ -113,6 +113,10 @@
 -- *Slide End* --
 
 -- *Slide* --
+<img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hpcmemory.png" />
+-- *Slide End* --
+
+-- *Slide* --
 ### Part 1: Memory Distribution
 * Operating systems like Plan 9 from Bell Labs creates a network function as a single collection of system resources.
 * OpenMP uses shared memory parallelism; MPI uses distributed memory parallelism. The latter can cross compute nodes.
