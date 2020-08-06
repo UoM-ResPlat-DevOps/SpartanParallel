@@ -114,6 +114,7 @@
 
 -- *Slide* --
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hpcmemory.png" />
+Image from Lawrence Livermore National Laboratory, U.S.A
 -- *Slide End* --
 
 -- *Slide* --
@@ -255,6 +256,12 @@ A *construct* starts with the directive, includes the structured block, and the 
 ### Part 2: ICVs 
 * An official OpenMP publication contains an absolutely superb example of internal control variables and their interactions with runtime library routines (`icv1.f90` and `icv1.c`). 
 * Four ICV's - nest-var, mex-active-levels-var, dyn-var, and nthreads-var - are modified by calls their respective library routines (`omp_set_nested()`, `omp_set_max_active_levels()`, `omp_set_dynamic()`, and `omp_set_num_threads()`).
+-- *Slide End* --
+
+-- *Slide* --
+### Part 2: Combined Example
+* Dijkstra shortest-path finder in a bidirectional graph 
+* Note use of parallel, single, barrier, and critical clauses
 -- *Slide End* --
 
 -- *Slide* --
