@@ -184,6 +184,7 @@ Image from Lawrence Livermore National Laboratory
 ### Part 2: Caveat
 * The OpenMP standard has no specifications about parallel I/O. This may result in issues (race conditions) if multiple threads attempt to write/read from the same file.
 * It is entirely up to the programmer to ensure that I/O is conducted correctly within the context of a multi-threaded program. 
+* Especially a problem, because a lot of OpenMP deals with parallelising loops.
 -- *Slide End* --
 
 -- *Slide* --
@@ -260,8 +261,8 @@ A *construct* starts with the directive, includes the structured block, and the 
 
 -- *Slide* --
 ### Part 2: Combined Example
-* Dijkstra shortest-path finder in a bidirectional graph 
-* Note use of parallel, single, barrier, and critical clauses
+* Dijkstra shortest-path finder in a bidirectional graph,`Dijkstra.c`
+* Note use of parallel, single, barrier, and critical clauses.
 -- *Slide End* --
 
 -- *Slide* --

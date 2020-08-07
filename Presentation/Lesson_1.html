@@ -141,6 +141,7 @@
 </script></section>
 <section data-markdown><script type="text/template">
 <img src="https://raw.githubusercontent.com/UoM-ResPlat-DevOps/SpartanParallel/master/Images/hpcmemory.png" />
+Image from Lawrence Livermore National Laboratory, U.S.A
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 1: Memory Distribution
@@ -198,6 +199,7 @@ Image from Lawrence Livermore National Laboratory
 ### Part 2: Caveat
 * The OpenMP standard has no specifications about parallel I/O. This may result in issues (race conditions) if multiple threads attempt to write/read from the same file.
 * It is entirely up to the programmer to ensure that I/O is conducted correctly within the context of a multi-threaded program. 
+* Especially a problem, because a lot of OpenMP deals with parallelising loops.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 2: Compiler Directives
@@ -258,6 +260,11 @@ A *construct* starts with the directive, includes the structured block, and the 
 ### Part 2: ICVs 
 * An official OpenMP publication contains an absolutely superb example of internal control variables and their interactions with runtime library routines (`icv1.f90` and `icv1.c`). 
 * Four ICV's - nest-var, mex-active-levels-var, dyn-var, and nthreads-var - are modified by calls their respective library routines (`omp_set_nested()`, `omp_set_max_active_levels()`, `omp_set_dynamic()`, and `omp_set_num_threads()`).
+</script></section>
+<section data-markdown><script type="text/template">
+### Part 2: Combined Example
+* Dijkstra shortest-path finder in a bidirectional graph,`Dijkstra.c`
+* Note use of parallel, single, barrier, and critical clauses.
 </script></section>
 <section data-markdown><script type="text/template">
 ### Part 3: Message Passing
