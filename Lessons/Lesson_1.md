@@ -176,7 +176,7 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 2: Preparation
 * The first step in any OpenMP program ought to be identification of the regions of code that could be executed concurrently or in parallel and then applying appropriate compiler directives.
-* The run-time routines (or sometimes functions in Fortran) are used to query and set threads within a directive scope.
+* The run-time routines (or functions in Fortran) are used to query and set threads within a directive scope.
 * The environment variables are specified by the shell to set and bind threads to processors. 
 -- *Slide End* --
 
@@ -196,7 +196,7 @@ Image from Lawrence Livermore National Laboratory
 -- *Slide* --
 ### Part 2: Compiler Directives
 * OpenMP compiler directives must begin with a sentinel (Fortran) or pragma (C). All compiler directives have the basic form of: `sentinel/pragma directive-name [clauses, ...]`
-* The directory `/usr/local/common/OpenMP` has Fortran and C "hello world" examples. The file "PARALLEL' contains various options for this fundamental construct.
+* The directory `/usr/local/common/OpenMP` has multiple Fortran and C "hello world" examples. The file "PARALLEL' contains various options for this fundamental construct.
 -- *Slide End* --
 
 -- *Slide* --
@@ -219,7 +219,8 @@ A *construct* starts with the directive, includes the structured block, and the 
 -- *Slide* --
 ### Part 2: Variables and Scoping
 * The examples `sharedhello.c` and `sharedhello.f90` illustrate two further aspects. Firstly, that the value of variables inside a function can be different to those outside it, and secondly the number of threads that a function uses can be set.
-* Data within a parallal region is shared by default and all threads can access this data. Explicit rules are available for non-default settings.
+* Data within a parallal region is shared by default and all threads can access this data.
+* The private (variable) option in the directive it ensures that the variable is private to the thread that is using it. See `helloomp2.c` and `helloomp2.f90`
 -- *Slide End* --
 
 -- *Slide* --
@@ -233,6 +234,7 @@ A *construct* starts with the directive, includes the structured block, and the 
 -- *Slide* --
 ### Part 2: Loop Constructs
 * One of the most typical applications is the parallelisation of loops. This includes a worksharing construct. Example are available at: `hello1millomp.c`, `hello1millomp.f90`. Note difference between "parallel" and "parallel for/do".
+* Save typing! Note difference between `hello1millomp.c` and `hello1amillomp.c`
 * A further variation is the SIMD loop, designed for multiple data tasks for newer CPUs. This example is available at `hello1millsimd.[c,f90]`
 -- *Slide End* --
 
@@ -250,7 +252,7 @@ A *construct* starts with the directive, includes the structured block, and the 
 -- *Slide* --
 ### Part 2: Tasks and Synchronisation
 * `Task` constructs allow for a thread to generate tasks that are executed according to the runtime system, immediately or delayed. Task synchronisation is carried out with the `barrier` or `taskwait` constructs. 
-* An example of the task constructs are `colourless-3.[f90,c]`
+* An example of the various task constructs are `colourless-3.[f90,c]`
 -- *Slide End* --
 
 -- *Slide* --
